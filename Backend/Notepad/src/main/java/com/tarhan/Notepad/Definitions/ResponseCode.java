@@ -20,6 +20,7 @@ public class ResponseCode {
     public static final String INVALID_PASSWORD_FORMAT= "PSW002";
     public static final String NULL_PASSWORD= "PSW003";
     public static final String PASSWORD_OK= "PSW004";
+    public static final String PASSWORD_ERROR= "PSW005";
 
     public static final String INVALID_USERNAME_LENGTH= "UNM001";
     public static final String INVALID_USERNAME_FORMAT= "UNM002";
