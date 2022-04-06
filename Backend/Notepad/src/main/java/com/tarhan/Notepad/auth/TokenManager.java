@@ -1,5 +1,8 @@
 package com.tarhan.Notepad.auth;
 
+import com.tarhan.Notepad.Dto.UserDto;
+import com.tarhan.Notepad.Entity.Users;
+import com.tarhan.Notepad.Service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,13 +17,16 @@ import java.util.Date;
 public class TokenManager {
 
     @Autowired
+    UserService userService;
 
-    private static final int validity = 5 * 60 * 1000;
+    private static final int validity = 60 * 60 * 1000;
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String generateToken(String username) {
+        Users user = userService.findByUsername(username);
         return Jwts.builder()
                 .setSubject(username)
+                .setId(user.getId().toString())
                 .setIssuer("tarhan")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
@@ -45,7 +51,7 @@ public class TokenManager {
         return claims.getExpiration().after(new Date(System.currentTimeMillis()));
     }
 
-    private Claims getClaims(String token) {
+    public Claims getClaims(String token) {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 

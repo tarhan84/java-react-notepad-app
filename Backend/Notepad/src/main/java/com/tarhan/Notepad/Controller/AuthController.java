@@ -22,7 +22,6 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody UserDto userDto){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
-
             return ResponseEntity.ok(tokenManager.generateToken(userDto.getUsername()));
         } catch (Exception e) {
             throw e;
