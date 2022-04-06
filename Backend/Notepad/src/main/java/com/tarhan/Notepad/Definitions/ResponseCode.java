@@ -15,6 +15,8 @@ public class ResponseCode {
     public static final String NOTE_DELETED = "NTE002";
     public static final String NOTE_UPDATED = "NTE003";
     public static final String NOTE_ERROR = "NTE004";
+    public static final String NOTE_FORMAT_ERROR = "NTE005";
+    public static final String NOTE_NOT_FOUND = "NTE006";
 
     public static final String INVALID_PASSWORD_LENGTH= "PSW001";
     public static final String INVALID_PASSWORD_FORMAT= "PSW002";

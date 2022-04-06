@@ -3,6 +3,7 @@ package com.tarhan.Notepad.Controller;
 import com.tarhan.Notepad.Definitions.ResponseCode;
 import com.tarhan.Notepad.Definitions.ResponseDto;
 import com.tarhan.Notepad.Dto.UserDto;
+import com.tarhan.Notepad.Dto.UserUpdatePassDto;
 import com.tarhan.Notepad.Entity.Notes;
 import com.tarhan.Notepad.Entity.Users;
 import com.tarhan.Notepad.Repository.NoteRepository;
@@ -38,6 +39,13 @@ public class UserController {
         ResponseDto responseDto = userService.deleteUser(userDto);
         return new ResponseEntity<>(responseDto,
                 responseDto.getResponseCode().equals(ResponseCode.USER_DELETED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("user/changepassword")
+    public ResponseEntity<ResponseDto> changePassword(@RequestBody UserUpdatePassDto userDto){
+        ResponseDto responseDto = userService.changePassword(userDto);
+        return new ResponseEntity<>(responseDto,
+                responseDto.getResponseCode().equals(ResponseCode.USER_UPDATED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
     }
 
 
