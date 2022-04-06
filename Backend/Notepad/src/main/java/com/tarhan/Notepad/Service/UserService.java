@@ -117,5 +117,6 @@ public class UserService {
     public Optional<Users> findById(Long userId){
       return userRepository.findById(userId);
     }
+    public  Users findByUsername(String username){ return userRepository.findByUsername(username);}
 
 }
