@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NoteRepository extends JpaRepository<Notes,Long> {
+public interface NoteRepository extends JpaRepository<Notes, Long> {
     int deleteByUserId(Long userId);
 
 }

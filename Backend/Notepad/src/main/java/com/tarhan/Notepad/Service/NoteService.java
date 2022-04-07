@@ -3,15 +3,15 @@ package com.tarhan.Notepad.Service;
 import com.tarhan.Notepad.Definitions.ResponseCode;
 import com.tarhan.Notepad.Definitions.ResponseDto;
 import com.tarhan.Notepad.Dto.NoteDto;
+import com.tarhan.Notepad.Dto.NoteUpdateDto;
 import com.tarhan.Notepad.Entity.Notes;
 import com.tarhan.Notepad.Entity.Users;
 import com.tarhan.Notepad.Repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -46,6 +46,28 @@ public class NoteService {
         }
     }
 
+    public ResponseDto update(NoteUpdateDto updateDto) {
+        Optional<Users> user = userService.findById(updateDto.getUserId());
+        if (user.isEmpty())
+            return new ResponseDto(ResponseCode.USER_NOT_FOUND, "user not found");
+
+        if (!checkNoteFormat(updateDto))
+            return new ResponseDto(ResponseCode.NOTE_FORMAT_ERROR, "body and title not be empty");
+
+        try {
+            Notes note = noteRepository.getById(updateDto.getNoteId());
+            if (note == null)
+                return new ResponseDto(ResponseCode.NOTE_NOT_FOUND, "note not found");
+            note.setTitle(updateDto.getTitle());
+            note.setBody(updateDto.getBody());
+            note.setUpdatedDate(getDate());
+            noteRepository.save(note);
+            return new ResponseDto(ResponseCode.NOTE_UPDATED, "note updated");
+        } catch (Exception e) {
+            return new ResponseDto(ResponseCode.NOTE_ERROR, e.toString());
+        }
+    }
+
     public ResponseDto deleteNote(Long noteId) {
         try {
             noteRepository.deleteById(noteId);
@@ -61,6 +83,12 @@ public class NoteService {
     }
 
     public boolean checkNoteFormat(NoteDto noteDto) {
+        String body = noteDto.getBody();
+        String title = noteDto.getTitle();
+        return body != null && body != "" && title != null && title != "";
+    }
+
+    public boolean checkNoteFormat(NoteUpdateDto noteDto) {
         String body = noteDto.getBody();
         String title = noteDto.getTitle();
         return body != null && body != "" && title != null && title != "";

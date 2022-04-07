@@ -66,30 +66,30 @@ public class UserService {
 
     }
 
-    public ResponseDto changePassword(UserUpdatePassDto usd){
+    public ResponseDto changePassword(UserUpdatePassDto usd) {
         String username = usd.getUsername();
         String oldPassword = usd.getOldPassword();
         String newPassword = usd.getNewPassword();
 
-        if(!userIsExist(username))
+        if (!userIsExist(username))
             return new ResponseDto(ResponseCode.USER_NOT_FOUND, "user not found");
 
         Users user = userRepository.findByUsername(username);
 
-        if(!user.getPassword().equals(oldPassword))
+        if (!user.getPassword().equals(oldPassword))
             return new ResponseDto(ResponseCode.PASSWORD_ERROR, "wrong password");
 
-        if(!passwordFormat(newPassword))
+        if (!passwordFormat(newPassword))
             return new ResponseDto(ResponseCode.INVALID_PASSWORD_FORMAT, "invalid password format");
 
-        if(oldPassword.equals(newPassword))
+        if (oldPassword.equals(newPassword))
             return new ResponseDto(ResponseCode.INVALID_PASSWORD_FORMAT, "old password and new password are same");
 
-        try{
+        try {
             user.setPassword(newPassword);
             userRepository.save(user);
             return new ResponseDto(ResponseCode.USER_UPDATED, "password updated");
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseDto(ResponseCode.USER_UPDATE_ERROR, e.toString());
         }
     }
@@ -114,8 +114,12 @@ public class UserService {
         return true;
     }
 
-    public Optional<Users> findById(Long userId){
-      return userRepository.findById(userId);
+    public Optional<Users> findById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    public Users findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 }

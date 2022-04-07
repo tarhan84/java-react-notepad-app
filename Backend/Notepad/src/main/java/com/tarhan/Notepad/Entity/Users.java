@@ -15,8 +15,8 @@ import static javax.persistence.FetchType.LAZY;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE,generator = "ID_GENERATOR")
-    @TableGenerator(name = "ID_GENERATOR", initialValue = 100000000,allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
+    @TableGenerator(name = "ID_GENERATOR", initialValue = 100000000, allocationSize = 1)
     @Column(name = "ID")
     private Long id;
 
