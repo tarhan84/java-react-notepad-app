@@ -9,8 +9,8 @@ import com.tarhan.Notepad.Entity.Users;
 import com.tarhan.Notepad.Repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -46,7 +46,7 @@ public class NoteService {
         }
     }
 
-    public ResponseDto update(NoteUpdateDto updateDto){
+    public ResponseDto update(NoteUpdateDto updateDto) {
         Optional<Users> user = userService.findById(updateDto.getUserId());
         if (user.isEmpty())
             return new ResponseDto(ResponseCode.USER_NOT_FOUND, "user not found");
@@ -56,7 +56,7 @@ public class NoteService {
 
         try {
             Notes note = noteRepository.getById(updateDto.getNoteId());
-            if(note == null)
+            if (note == null)
                 return new ResponseDto(ResponseCode.NOTE_NOT_FOUND, "note not found");
             note.setTitle(updateDto.getTitle());
             note.setBody(updateDto.getBody());
@@ -87,6 +87,7 @@ public class NoteService {
         String title = noteDto.getTitle();
         return body != null && body != "" && title != null && title != "";
     }
+
     public boolean checkNoteFormat(NoteUpdateDto noteDto) {
         String body = noteDto.getBody();
         String title = noteDto.getTitle();

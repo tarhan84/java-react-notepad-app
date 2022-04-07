@@ -11,7 +11,7 @@ public class AuthService {
     @Autowired
     TokenManager tokenManager;
 
-    public Claims getClaims(String token){
+    public Claims getClaims(String token) {
         return tokenManager.getClaims(token);
     }
 }

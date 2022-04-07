@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @EnableSwagger2
 public class NotepadApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NotepadApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NotepadApplication.class, args);
+    }
 
 }

@@ -19,7 +19,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDto userDto){
+    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
             return ResponseEntity.ok(tokenManager.generateToken(userDto.getUsername()));

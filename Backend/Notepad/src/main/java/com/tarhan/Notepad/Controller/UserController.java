@@ -23,24 +23,24 @@ public class UserController {
     AuthService authService;
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseDto> addUser(@RequestBody UserDto userDto){
+    public ResponseEntity<ResponseDto> addUser(@RequestBody UserDto userDto) {
         ResponseDto responseDto = userService.addUser(userDto);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.USER_ADDED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.USER_ADDED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<ResponseDto> deleteUser(@RequestBody UserDto userDto){
+    public ResponseEntity<ResponseDto> deleteUser(@RequestBody UserDto userDto) {
         ResponseDto responseDto = userService.deleteUser(userDto);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.USER_DELETED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.USER_DELETED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/changepassword")
-    public ResponseEntity<ResponseDto> changePassword(@RequestBody UserUpdatePassDto userDto){
+    public ResponseEntity<ResponseDto> changePassword(@RequestBody UserUpdatePassDto userDto) {
         ResponseDto responseDto = userService.changePassword(userDto);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.USER_UPDATED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.USER_UPDATED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
 

@@ -24,33 +24,33 @@ public class NoteController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseDto> add(@RequestBody NoteDto noteDto){
+    public ResponseEntity<ResponseDto> add(@RequestBody NoteDto noteDto) {
         ResponseDto responseDto = noteService.addNote(noteDto);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.NOTE_ADDED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.NOTE_ADDED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
 
     @GetMapping("/delete")
-    public ResponseEntity<ResponseDto> deleteNote(@RequestParam("noteId") Long noteId){
+    public ResponseEntity<ResponseDto> deleteNote(@RequestParam("noteId") Long noteId) {
         ResponseDto responseDto = noteService.deleteNote(noteId);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.NOTE_ADDED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.NOTE_ADDED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/deletebyuser")
-    public ResponseEntity<ResponseDto> deleteByUser(@RequestHeader(value="Authorization") String token){
+    public ResponseEntity<ResponseDto> deleteByUser(@RequestHeader(value = "Authorization") String token) {
         Claims claims = authService.getClaims(token.substring(7));
         Long userId = Long.parseLong(claims.getId());
         ResponseDto responseDto = noteService.deleteByUserId(userId);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.NOTE_DELETED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.NOTE_DELETED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<ResponseDto> update(@RequestBody NoteUpdateDto noteUpdateDto){
+    public ResponseEntity<ResponseDto> update(@RequestBody NoteUpdateDto noteUpdateDto) {
         ResponseDto responseDto = noteService.update(noteUpdateDto);
         return new ResponseEntity<>(responseDto,
-                responseDto.getResponseCode().equals(ResponseCode.NOTE_UPDATED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                responseDto.getResponseCode().equals(ResponseCode.NOTE_UPDATED) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }
