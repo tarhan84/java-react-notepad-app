@@ -1,4 +1,4 @@
-package com.tarhan.Notepad.auth;
+package com.tarhan.Notepad.Jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

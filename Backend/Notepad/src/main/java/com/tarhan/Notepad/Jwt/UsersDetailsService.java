@@ -1,7 +1,6 @@
-package com.tarhan.Notepad.auth;
+package com.tarhan.Notepad.Jwt;
 
 import com.tarhan.Notepad.Entity.Users;
-import com.tarhan.Notepad.Repository.UserRepository;
 import com.tarhan.Notepad.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

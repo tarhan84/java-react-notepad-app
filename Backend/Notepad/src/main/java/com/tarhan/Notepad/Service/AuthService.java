@@ -1,6 +1,6 @@
 package com.tarhan.Notepad.Service;
 
-import com.tarhan.Notepad.auth.TokenManager;
+import com.tarhan.Notepad.Jwt.TokenManager;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

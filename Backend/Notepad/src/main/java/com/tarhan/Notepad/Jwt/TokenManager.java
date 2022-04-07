@@ -1,6 +1,5 @@
-package com.tarhan.Notepad.auth;
+package com.tarhan.Notepad.Jwt;
 
-import com.tarhan.Notepad.Dto.UserDto;
 import com.tarhan.Notepad.Entity.Users;
 import com.tarhan.Notepad.Service.UserService;
 import io.jsonwebtoken.Claims;

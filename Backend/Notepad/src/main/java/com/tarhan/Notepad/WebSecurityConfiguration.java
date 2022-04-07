@@ -1,7 +1,7 @@
 package com.tarhan.Notepad;
 
-import com.tarhan.Notepad.auth.JwtTokenFilter;
-import com.tarhan.Notepad.auth.UsersDetailsService;
+import com.tarhan.Notepad.Jwt.JwtTokenFilter;
+import com.tarhan.Notepad.Jwt.UsersDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

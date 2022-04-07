@@ -1,7 +1,7 @@
 package com.tarhan.Notepad.Controller;
 
 import com.tarhan.Notepad.Dto.UserDto;
-import com.tarhan.Notepad.auth.TokenManager;
+import com.tarhan.Notepad.Jwt.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

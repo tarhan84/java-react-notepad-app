@@ -10,14 +10,11 @@ import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
@@ -25,21 +22,21 @@ public class UserController {
     @Autowired
     AuthService authService;
 
-    @PostMapping("/user/add")
+    @PostMapping("/add")
     public ResponseEntity<ResponseDto> addUser(@RequestBody UserDto userDto){
         ResponseDto responseDto = userService.addUser(userDto);
         return new ResponseEntity<>(responseDto,
                 responseDto.getResponseCode().equals(ResponseCode.USER_ADDED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("user/delete")
+    @PostMapping("/delete")
     public ResponseEntity<ResponseDto> deleteUser(@RequestBody UserDto userDto){
         ResponseDto responseDto = userService.deleteUser(userDto);
         return new ResponseEntity<>(responseDto,
                 responseDto.getResponseCode().equals(ResponseCode.USER_DELETED)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("user/changepassword")
+    @PostMapping("/changepassword")
     public ResponseEntity<ResponseDto> changePassword(@RequestBody UserUpdatePassDto userDto){
         ResponseDto responseDto = userService.changePassword(userDto);
         return new ResponseEntity<>(responseDto,
