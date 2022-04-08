@@ -8,8 +8,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDateTime;
 
-@SpringBootApplication
 @EnableSwagger2
+@SpringBootApplication
 public class NotepadApplication {
 
     public static void main(String[] args) {

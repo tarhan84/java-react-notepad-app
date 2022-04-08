@@ -1,7 +1,9 @@
 package com.tarhan.Notepad.Controller;
 
 import com.tarhan.Notepad.Dto.UserDto;
+import com.tarhan.Notepad.Entity.Users;
 import com.tarhan.Notepad.Jwt.TokenManager;
+import com.tarhan.Notepad.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {

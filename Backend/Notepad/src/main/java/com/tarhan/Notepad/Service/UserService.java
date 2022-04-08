@@ -21,6 +21,7 @@ public class UserService {
     public ResponseDto addUser(UserDto usd) {
         String userName = usd.getUsername();
         String password = usd.getPassword();
+        String role = usd.getRole() == null ? "user" : usd.getRole();
 
         if (userIsExist(userName))
             return new ResponseDto(ResponseCode.USER_EXIST, "user exist");
@@ -34,6 +35,7 @@ public class UserService {
         Users user = new Users();
         user.setUserName(userName);
         user.setPassword(password);
+        user.setRole(role);
 
         try {
             userRepository.save(user);

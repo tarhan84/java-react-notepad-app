@@ -27,6 +27,7 @@ public class TokenManager {
                 .setSubject(username)
                 .setId(user.getId().toString())
                 .setIssuer("tarhan")
+                .claim("role",user.getRole())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
                 .signWith(key)
