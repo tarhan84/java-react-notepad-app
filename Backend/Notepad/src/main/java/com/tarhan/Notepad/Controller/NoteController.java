@@ -7,6 +7,8 @@ import com.tarhan.Notepad.Dto.NoteUpdateDto;
 import com.tarhan.Notepad.Service.AuthService;
 import com.tarhan.Notepad.Service.NoteService;
 import io.jsonwebtoken.Claims;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/note")
+@Api(value = "API Controller")
 public class NoteController {
 
     @Autowired
@@ -24,6 +27,7 @@ public class NoteController {
 
 
     @PostMapping("/add")
+    @ApiOperation("Add Note")
     public ResponseEntity<ResponseDto> add(@RequestBody NoteDto noteDto) {
         ResponseDto responseDto = noteService.addNote(noteDto);
         return new ResponseEntity<>(responseDto,
@@ -32,6 +36,7 @@ public class NoteController {
 
 
     @GetMapping("/delete")
+    @ApiOperation("Delete Note")
     public ResponseEntity<ResponseDto> deleteNote(@RequestParam("noteId") Long noteId) {
         ResponseDto responseDto = noteService.deleteNote(noteId);
         return new ResponseEntity<>(responseDto,
@@ -39,6 +44,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/deletebyuser")
+    @ApiOperation("Delete Note By User Id")
     public ResponseEntity<ResponseDto> deleteByUser(@RequestHeader(value = "Authorization") String token) {
         Claims claims = authService.getClaims(token.substring(7));
         Long userId = Long.parseLong(claims.getId());
@@ -48,6 +54,7 @@ public class NoteController {
     }
 
     @PostMapping("/update")
+    @ApiOperation("Update Note")
     public ResponseEntity<ResponseDto> update(@RequestBody NoteUpdateDto noteUpdateDto) {
         ResponseDto responseDto = noteService.update(noteUpdateDto);
         return new ResponseEntity<>(responseDto,

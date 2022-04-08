@@ -21,6 +21,7 @@ public class UserService {
     public ResponseDto addUser(UserDto usd) {
         String userName = usd.getUsername();
         String password = usd.getPassword();
+        String role = usd.getRole() == null ? "user" : usd.getRole();
 
         if (userIsExist(userName))
             return new ResponseDto(ResponseCode.USER_EXIST, "user exist");
@@ -34,6 +35,7 @@ public class UserService {
         Users user = new Users();
         user.setUserName(userName);
         user.setPassword(password);
+        user.setRole(role);
 
         try {
             userRepository.save(user);
@@ -43,19 +45,13 @@ public class UserService {
         }
     }
 
-    public ResponseDto deleteUser(UserDto usd) {
-        String username = usd.getUsername();
-        String password = usd.getPassword();
+    public ResponseDto deleteUser(String username) {
 
         if (!userIsExist(username)) {
             return new ResponseDto(ResponseCode.USER_NOT_FOUND, "user not found");
         }
 
         Users user = userRepository.findByUsername(username);
-
-        if (!user.getPassword().equals(password)) {
-            return new ResponseDto(ResponseCode.PASSWORD_ERROR, "wrong password");
-        }
 
         try {
             userRepository.delete(user);
