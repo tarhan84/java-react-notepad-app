@@ -6,6 +6,7 @@ import com.tarhan.Notepad.Definitions.ResponseCode;
 import com.tarhan.Notepad.Definitions.ResponseDto;
 import com.tarhan.Notepad.Dto.UserDto;
 import com.tarhan.Notepad.Dto.UserUpdatePassDto;
+import com.tarhan.Notepad.Jwt.TokenManager;
 import com.tarhan.Notepad.Service.AuthService;
 import com.tarhan.Notepad.Service.UserService;
 import io.jsonwebtoken.Claims;
@@ -24,12 +25,15 @@ public class UserController {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    TokenManager tokenManager;
+
     @PostMapping("/add")
     public ResponseEntity<ResponseDto> addUser(@RequestBody UserDto userDto, @RequestHeader(value = "Authorization",defaultValue = "none") String token) {
         try {
             if(token != null && !token.equals("none") ){
                 token = token.substring(7);
-                Claims claims = authService.getClaims(token);
+                Claims claims = tokenManager.getClaims(token);
                 if(claims.get("role").equals(Constants.ROLE_ADMIN)){
                     ResponseDto responseDto = userService.addUser(userDto);
                     return new ResponseEntity<>(responseDto,
