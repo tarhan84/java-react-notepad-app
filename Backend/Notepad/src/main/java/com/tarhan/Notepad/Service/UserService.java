@@ -45,19 +45,13 @@ public class UserService {
         }
     }
 
-    public ResponseDto deleteUser(UserDto usd) {
-        String username = usd.getUsername();
-        String password = usd.getPassword();
+    public ResponseDto deleteUser(String username) {
 
         if (!userIsExist(username)) {
             return new ResponseDto(ResponseCode.USER_NOT_FOUND, "user not found");
         }
 
         Users user = userRepository.findByUsername(username);
-
-        if (!user.getPassword().equals(password)) {
-            return new ResponseDto(ResponseCode.PASSWORD_ERROR, "wrong password");
-        }
 
         try {
             userRepository.delete(user);
